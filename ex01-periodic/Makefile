@@ -1,4 +1,4 @@
-OUTPUTFILE := palindromes
+OUTPUTFILE := periodic
 SRC_DIR := .
 OBJ_DIR := .
 SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
