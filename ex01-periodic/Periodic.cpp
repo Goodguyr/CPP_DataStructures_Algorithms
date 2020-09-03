@@ -15,16 +15,21 @@ Periodic::Periodic() {
 }
 
 int Periodic::isPeriodic(int number){
-    int length;
     vector<char> line;
     while(number){
-        length += 1;
         int temp = number % 10;
         char n = '0' + temp;
         line.push_back(n);
         number = number / 10;
     }
     reverse(line.begin(), line.end());
+    while(line[line.size() - 1] == '0'){
+        line.erase(line.end() - 1);
+    }
+    this->output = "";
+    for (char i : line){
+        this->output += i;
+    }
     return longestPeriod(line);
 }
 
@@ -32,59 +37,57 @@ int Periodic::isPeriodic(int number){
 int Periodic::isPeriodic(string word) {
     vector<char> line;
     copy(word.begin(), word.end(), back_inserter(line));
+    while(line[0] == '0'){
+        line.erase(line.begin());
+    }
+    while(line[line.size() - 1] == '0'){
+        line.erase(line.end() - 1);
+    }
+    for(int i = 0; i < line.size(); i++){
+        int temp = line[i];
+        if (temp > 64 && temp < 91){
+            temp += 32;
+            line[i] = (char)temp;
+        }
+    }
+    this->output = "";
+    for (char i : line){
+        this->output += i;
+    }
     return longestPeriod(line);
 }
 
 
 int longestPeriod(vector<char> line){
-    bool odd;
     int lineLength = line.size() - 1;
-    cout << "Input length: " << line.size() << endl;
-    int sep = lineLength + 1;
+    int sep = line.size() / 2;
     vector<string> periods;
     string LHS, RHS, sample, fullLine, answer;
-    
-    if(sep & 1){
-        odd = true;
-        sep = lineLength + 1;
-        sep /= 2;
-    }
-    else{
-        sep /= 2;
-    }
-
     for(int i = 0; i < sep; i++){
         LHS += line[i];
         RHS.insert(0, 1, line[lineLength - i]);
         if(LHS == RHS){
-            cout << LHS << "   " << RHS << endl;
             periods.push_back(LHS);
         }
     }
-
-    fullLine = LHS + RHS;
-
-    if(odd){
-        fullLine.insert(sep, 1, line[sep]);
+    for(char i : line){
+        fullLine += i;
     }
-
     if(!periods.size()){
         return 0;
     }
     else{
         for(string period : periods){
-            cout << period << endl;
             if (!(line.size() % period.size())){
                 int times = line.size() / period.size();
                 for(int i = 0; i < times; i++){
                     sample += period;
                 }
-                cout << "sample is " << sample << endl;
-                cout << "full line is " << fullLine << endl;
                 if(sample == fullLine){
                     answer = period;
                     break;
                 }
+                sample = "";
             }
         }
     return answer.size();

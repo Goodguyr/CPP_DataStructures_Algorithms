@@ -6,6 +6,7 @@ namespace ds_course
     {
     public:
     Periodic(); 
+    std::string output;
     int isPeriodic(int number);
     int isPeriodic(std::string word);
     };

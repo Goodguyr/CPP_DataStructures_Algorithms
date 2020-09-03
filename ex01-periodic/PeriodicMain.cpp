@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
-#include "Periodic.cpp"
+#include "Periodic.h"
 
 using namespace std;
 using namespace ds_course;
@@ -27,13 +27,14 @@ int main()
         }
         else {
             if (mode == "dec") {
-                sstr >> inputDec;            
+                sstr >> inputDec;
+                string out = to_string(inputDec);
                 int res = pal.isPeriodic(inputDec);
-                cout << inputDec << " " << res << endl;
+                cout << pal.output << " " << res << endl;
             } else if (mode == "str" || mode == "hex") {
                 sstr >> inputString;
                 int res = pal.isPeriodic(inputString);
-                cout << inputString << " " << res << endl;
+                cout << pal.output << " " << res << endl;
             }
         }
     }
