@@ -8,6 +8,6 @@ namespace ds_course
     Periodic(); 
     std::string output;
     int isPeriodic(int number);
-    int isPeriodic(std::string word);
+    int isPeriodic(std::string word, bool hex);
     };
 }

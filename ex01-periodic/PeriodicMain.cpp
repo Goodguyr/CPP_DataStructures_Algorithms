@@ -32,8 +32,9 @@ int main()
                 int res = pal.isPeriodic(inputDec);
                 cout << pal.output << " " << res << endl;
             } else if (mode == "str" || mode == "hex") {
+                bool hex = mode == "hex";
                 sstr >> inputString;
-                int res = pal.isPeriodic(inputString);
+                int res = pal.isPeriodic(inputString, hex);
                 cout << pal.output << " " << res << endl;
             }
         }
