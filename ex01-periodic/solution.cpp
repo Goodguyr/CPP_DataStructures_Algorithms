@@ -15,7 +15,7 @@ string operator* (string n, int k){
     return answer;
 }
 
-bool allSame(string toCheck){
+bool allSame(string &toCheck){
     char temp = toCheck[0];
     for (char i : toCheck){
         if (i != temp){
@@ -25,7 +25,7 @@ bool allSame(string toCheck){
     return true;
 }
 
-bool isPrime(int x){
+bool isPrime(int &x){
     int half = x / 2;
     for (int i = 2; i < half; i++){
         if(!(x % i)){
@@ -35,7 +35,7 @@ bool isPrime(int x){
     return true;
 }
 
-int longestPeriod(string line){
+int longestPeriod(string& line){
     if(line.length() < 2){
         return 0;
     }
@@ -55,7 +55,7 @@ int longestPeriod(string line){
         counter = 2;
     }
     int periodLength = lineLength / counter;
-    string period, smallPeriod;
+    string period, smallPeriod, bestPeriod = line;
     while (counter <= periodLength){
         period = line.substr(0,periodLength);
         smallPeriod = line.substr(0,counter);
@@ -63,12 +63,19 @@ int longestPeriod(string line){
             if(allSame(smallPeriod)){
                 return 1;
             }
-            return smallPeriod.length();
+            if(bestPeriod.length() > smallPeriod.length()){
+                bestPeriod = smallPeriod;
+            }
         }
         else if(period * counter == line){
-            return periodLength;
+            if(bestPeriod.length() > period.length()){
+                bestPeriod = period;
+            }
         }
         counter += adder;
+    }
+    if(bestPeriod.length() != line.length()){
+        return bestPeriod.length();
     }
     return 0;
 }

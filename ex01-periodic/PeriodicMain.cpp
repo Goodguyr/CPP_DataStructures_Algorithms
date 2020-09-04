@@ -12,9 +12,7 @@ int main()
     Periodic pal;
     string mode;
     cin >> mode;
-    string inputString;
-    int inputDec;
-    int inputHex;
+    string input;
 
     //cout << '\'' << mode << '\'' << endl;
     cin.ignore(10000,'\n');
@@ -26,17 +24,9 @@ int main()
             continue;
         }
         else {
-            if (mode == "dec") {
-                sstr >> inputDec;
-                string out = to_string(inputDec);
-                int res = pal.isPeriodic(inputDec);
-                cout << pal.output << " " << res << endl;
-            } else if (mode == "str" || mode == "hex") {
-                bool hex = mode == "hex";
-                sstr >> inputString;
-                int res = pal.isPeriodic(inputString, hex);
-                cout << pal.output << " " << res << endl;
-            }
+            sstr >> input;
+            int res = pal.isPeriodic(input, mode);
+            cout << pal.output << " " << res << endl;
         }
     }
 }
