@@ -1,7 +1,6 @@
 #include "Student.h"
 
 using namespace ds_course;
-using namespace std;
 
 Student::Student(){}
 
