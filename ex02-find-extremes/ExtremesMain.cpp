@@ -1,4 +1,5 @@
 #include<iostream>
+#include<iomanip>
 #include "Student.h"
 
 using namespace std;
@@ -43,8 +44,7 @@ int main(){
     }
     Student minStudent = getMin(classOfStudents, count);
     Student maxStudent = getMax(classOfStudents, count);
-    cout.setf(ios::fixed, 1);
-    cout << minStudent.age << " " << minStudent.height << endl;
-    cout << maxStudent.age << " " << maxStudent.height << endl;
+    cout << minStudent.age << " " << fixed << setprecision(5) << minStudent.height << endl;
+    cout << maxStudent.age << " " << fixed <<  setprecision(5) << maxStudent.height << endl;
     return 0;
 }
