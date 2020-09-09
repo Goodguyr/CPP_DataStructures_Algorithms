@@ -1,4 +1,5 @@
 #include <string>
+using namespace std;
 
 namespace ds_course
 {
@@ -10,3 +11,8 @@ namespace ds_course
     int isPeriodic(std::string &word, std::string &mode);
     };
 }
+
+string operator* (string, int);
+bool allSame(string&);
+bool isPrime(int&);
+int longestPeriod(string&);
