@@ -2,13 +2,10 @@
 
 
 struct Node{
-    Node(int, int);
+    Node(int);
     int value;
-    std::vector<Node> children;
-    void addChild(int, int);
-    int parent;
+    std::vector<int> children;
+    void addChild(int);
 };
 
-std::vector<Node> connectNodes(std::vector<Node> nodes);
-
-void inverseTree(Node& root, std::vector<Node> nodeList);
+void inverseTree(Node* node, std::map<int, Node*>* nodeList);

@@ -1,58 +1,31 @@
 #include<vector>
 #include <iostream>
+#include<map>
 #include "Node.h"
 
 using namespace std;
 
-Node::Node(int val, int par){
+Node::Node(int val){
     value = val;
-    parent = par;
 }
 
-void Node::addChild(int val, int par){
-    children.push_back(Node(val, par));
+void Node::addChild(int val){
+    children.push_back(val);
 }
 
-vector<Node> connectNodes(vector<Node> nodes){
-    int noParent = 0;
-    while(noParent != 1){
-        noParent = 0;
-        for(int i = 0; i < nodes.size(); i++){
-            if(nodes[i].parent == 0){
-                noParent++;
-                for(int j = 0; j < nodes.size(); j++){
-                    for(int k = 0; k < nodes[j].children.size(); k++){
-                        if(nodes[j].children[k].value == nodes[i].value){
-                            nodes[i].parent = nodes[j].value;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return nodes;
-}
-
-
-void inverseTree(Node& node, vector<Node> nodeList){
+void inverseTree(Node* node, map<int, Node*>* nodeList){
     string line = "";
-    line += to_string(node.value);
-    int i = node.children.size();
-    vector<Node> hasChildren;
-    while(i != 0){
-        i--;
+    line += to_string(node->value);
+    vector<Node*> hasChildren;
+    for(int i = node->children.size() - 1; i > -1; i--){
         line += " ";
-        line += to_string(node.children[i].value);
-        Node* child;
-        for(Node oneNode : nodeList){
-            if(oneNode.value == node.children[i].value && oneNode.children.size()){
-                hasChildren.push_back(oneNode);
-            }
+        line += to_string(node->children[i]);
+        if(nodeList->count(node->children[i])){
+            hasChildren.push_back(nodeList->operator[](node->children[i]));
         }
     }
     cout << line << endl;
-    for(Node i : hasChildren){
-        //Node child = node.children[i];
+    for(Node* i : hasChildren){
         inverseTree(i, nodeList);
     }
 }
