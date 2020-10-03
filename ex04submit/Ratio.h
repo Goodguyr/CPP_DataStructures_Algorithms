@@ -1,3 +1,5 @@
+int gcd(int,int);
+
 class Ratio{
 private:
     int numerator;
@@ -6,7 +8,10 @@ public:
     Ratio(int n = 0, int d = 1): numerator(n), denominator(d){
         simplify();
     }
-    void operator+=(Ratio&);
+    friend Ratio operator*(Ratio& a, Ratio& b);
+    friend Ratio operator+(Ratio& a, Ratio& b);
+    friend Ratio operator-(Ratio& a, Ratio& b);
+    Ratio& operator+=(Ratio& b);
     int getNumerator(){return numerator;}
     int getDenominator(){return denominator;}
     void setNumerator(int n){
@@ -20,7 +25,5 @@ public:
         numerator /= divisor;
         denominator /= divisor;
     }
-    friend int gcd(int,int);
+    friend std::ostream& operator<<(std::ostream &out, Ratio& ratio);
 };
-
-int gcd(int,int);
