@@ -8,10 +8,10 @@ public:
     Ratio(int n = 0, int d = 1): numerator(n), denominator(d){
         simplify();
     }
-    friend Ratio operator*(Ratio& a, Ratio& b);
-    friend Ratio operator+(Ratio& a, Ratio& b);
-    friend Ratio operator-(Ratio& a, Ratio& b);
-    Ratio& operator+=(Ratio& b);
+    friend Ratio operator*(Ratio a, Ratio b);
+    friend Ratio operator+(Ratio a, Ratio b);
+    friend Ratio operator-(Ratio a, Ratio b);
+    Ratio& operator+=(Ratio b);
     int getNumerator(){return numerator;}
     int getDenominator(){return denominator;}
     void setNumerator(int n){

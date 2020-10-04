@@ -2,7 +2,7 @@
 #include"Ratio.h"
 
 
-Ratio operator+(Ratio& a, Ratio& b){
+Ratio operator+(Ratio a, Ratio b){
     // a.setNumerator(a.getNumerator() * b.getDenominator());
     // b.setNumerator(b.getNumerator() * a.getDenominator());
     // a.setDenominator(a.getDenominator() * b.getDenominator());
@@ -12,7 +12,7 @@ Ratio operator+(Ratio& a, Ratio& b){
     return a += b;
 }
 
-Ratio operator-(Ratio& a, Ratio& b){
+Ratio operator-(Ratio a, Ratio b){
     a.setNumerator(a.getNumerator() * b.getDenominator());
     b.setNumerator(b.getNumerator() * a.getDenominator());
     a.setDenominator(a.getDenominator() * b.getDenominator());
@@ -21,7 +21,7 @@ Ratio operator-(Ratio& a, Ratio& b){
     return a;
 }
 
-Ratio operator*(Ratio& a, Ratio& b){
+Ratio operator*(Ratio a, Ratio b){
     a.setNumerator(a.getNumerator() * b.getNumerator());
     a.setDenominator(a.getDenominator() * b.getDenominator());
     a.simplify();
@@ -29,7 +29,7 @@ Ratio operator*(Ratio& a, Ratio& b){
 }
 
 
-Ratio& Ratio::operator+=(Ratio& b){
+Ratio& Ratio::operator+=(Ratio b){
     this->setNumerator(this->getNumerator() * b.getDenominator());
     b.setNumerator(b.getNumerator() * this->getDenominator());
     this->setDenominator(this->getDenominator() * b.getDenominator());
@@ -46,6 +46,15 @@ int gcd(int a, int b){
 }
 
 std::ostream& operator<<(std::ostream &out, Ratio& ratio){
+    ratio.simplify();
+    if(ratio.denominator < 0 && ratio.numerator > 0){
+        ratio.denominator = -ratio.denominator;
+        ratio.numerator -= 2 * ratio.numerator;
+    }
+    else if(ratio.denominator < 0 && ratio.numerator < 0){
+        ratio.denominator = -ratio.denominator;
+        ratio.numerator = -ratio.numerator;
+    }
     if(ratio.numerator == 0 || ratio.denominator == 0){
         out << 0;
         return out;

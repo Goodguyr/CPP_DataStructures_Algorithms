@@ -66,12 +66,10 @@ public:
         Matrix<T> result(this->getRow(), b.getCol());
         for(int i = 0; i < this->getRow(); i++){
             for(int j = 0; j < b.getCol(); j++){
-                T temp = 0;
                 for(int k = 0; k < this->getCol(); k++){
-                    T answ = this->getNum(i,k) * b.getNum(k,j);
-                    temp += answ;
+                    T a = this->getNum(i,k) * b.getNum(k,j);
+                    result.getNum(i,j) += a;
                 }
-                result.addNumber(temp);
             }
         }
         return result;
