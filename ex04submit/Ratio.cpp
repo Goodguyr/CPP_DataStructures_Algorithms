@@ -40,6 +40,9 @@ Ratio& Ratio::operator+=(Ratio b){
 
 int gcd(int a, int b){
     if(b == 0){
+        if(a < 0){
+            return -a;
+        }
         return a;
     }
     return gcd(b, (a % b));
@@ -47,16 +50,8 @@ int gcd(int a, int b){
 
 std::ostream& operator<<(std::ostream &out, Ratio& ratio){
     ratio.simplify();
-    if(ratio.denominator < 0 && ratio.numerator > 0){
-        ratio.denominator = -ratio.denominator;
-        ratio.numerator -= 2 * ratio.numerator;
-    }
-    else if(ratio.denominator < 0 && ratio.numerator < 0){
-        ratio.denominator = -ratio.denominator;
-        ratio.numerator = -ratio.numerator;
-    }
     if(ratio.numerator == 0 || ratio.denominator == 0){
-        out << 0;
+        out << 0 << "/" << 1;
         return out;
     }
     out << ratio.numerator << "/" << ratio.denominator;
