@@ -26,7 +26,6 @@ int main(){
 	string line;
 	getline(cin, line);
 	while(line.size() > 1){
-		cout << line << endl;
 		istringstream ss(line); 
 		int pos;
 		string action;
@@ -50,19 +49,17 @@ int main(){
 				cout << "OutOfBoundsException" << endl;
 				return 0;
 			}
-			for(int i = 0; i <= pos; i++){
+			for(int i = 0; i < pos; i++){
 				myList->advance();
 				curPos++;
 			}
 			myList->remove();
-			curPos--;
 		}
 		while(curPos != 0){
 			curPos++;
 			curPos %= myList->getSize();
 			myList->advance();
 		}
-		cout << myList->to_str() << endl << endl;
 		getline(cin, line);
 	}
 	cout << myList->to_str() << endl;

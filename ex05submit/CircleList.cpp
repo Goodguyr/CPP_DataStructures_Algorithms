@@ -39,7 +39,6 @@ void CircleList::add(const int& num){
 
 void CircleList::remove(){
     if(size == 1){
-        delete cursor;
         size--;
         return;
     }
