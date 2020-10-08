@@ -14,8 +14,8 @@ class CircleList{
     int size;
 public:
     CircleList(){
-        // CNode* newNode = new CNode;
-        // cursor = newNode;
+        CNode* newNode = new CNode(0);
+        cursor = newNode;
         size = 0;
     };
     ~CircleList();

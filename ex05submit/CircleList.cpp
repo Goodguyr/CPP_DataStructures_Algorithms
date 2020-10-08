@@ -56,6 +56,9 @@ int CircleList::getSize(){
 
 std::string CircleList::to_str() const {
     std::string line = "";
+    if(empty()){
+        return "";
+    }
     CNode* temp = cursor->next;
     while(temp != cursor){
         line += std::to_string(temp->value) + " ";
