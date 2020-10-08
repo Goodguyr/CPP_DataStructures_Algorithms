@@ -4,7 +4,9 @@
 
 
 CircleList::~CircleList(){
-
+    while(!empty()){
+        remove();
+    }
 };
 
 bool CircleList::empty() const {
@@ -41,14 +43,9 @@ void CircleList::remove(){
         size--;
         return;
     }
-    CNode* next = cursor->next;
-    CNode* i = cursor->next;
-    while(i->next != cursor){
-        i = i->next;
-    }
-    delete cursor;
-    i->next = next;
-    cursor = i;
+    CNode* next = cursor->next->next;
+    delete cursor->next;
+    cursor->next = next;
     size--;
 };
 
