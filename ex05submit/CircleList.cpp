@@ -36,6 +36,11 @@ void CircleList::add(const int& num){
 };
 
 void CircleList::remove(){
+    if(size == 1){
+        delete cursor;
+        size--;
+        return;
+    }
     CNode* next = cursor->next;
     CNode* i = cursor->next;
     while(i->next != cursor){
@@ -43,6 +48,7 @@ void CircleList::remove(){
     }
     delete cursor;
     i->next = next;
+    cursor = i;
     size--;
 };
 
@@ -57,7 +63,7 @@ int CircleList::getSize(){
 std::string CircleList::to_str() const {
     std::string line = "";
     if(empty()){
-        return "";
+        return line;
     }
     CNode* temp = cursor->next;
     while(temp != cursor){
