@@ -33,12 +33,12 @@ public:
             }
         }
     }
-    ~Matrix(){
-        for(int i = 0; i < rows; i++){
-            delete[] data[i];
-        }
-        delete[] data;
-    };
+    // ~Matrix(){
+    //     for(int i = 0; i < rows; i++){
+    //         delete[] data[i];
+    //     }
+    //     delete data;
+    // };
     void addNumber(T num){
         int x = currPos / collumns; 
         data[x][currPos % collumns] = num;

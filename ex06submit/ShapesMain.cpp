@@ -25,8 +25,7 @@ int main(){
         }
         else if(action == "CIRCLE"){
             ss >> color;
-            temp = new Circle(color);
-            stack.push(temp);
+            stack.push(new Circle(color));
         }
         else if(action == "GROUP"){
             int count;
@@ -34,19 +33,19 @@ int main(){
             stack.group(count);
         }
         else if(action == "TRANSF"){
-            // string mode;
-            // ss >> mode;
-            // Shape* temp = stack.pop(); 
-            // temp->transform(mode);
-            // stack.push(temp);
+            string mode;
+            ss >> mode;
+            Shape* temp = stack.pop();
+            temp->transform(mode, ss);
+            stack.push(temp);
         }
         else if(action == "SHOW"){
             int width, height;
             ss >> width >> height;
             cout << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << endl;
             cout << "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"" + to_string(width) + "\" height=\"" + to_string(height) + "\">" << endl;
+            cout << "<path d=\"M 0 0 L " + to_string(width) + " 0 L " + to_string(width) + " " + to_string(height) + " L 0 " + to_string(height) + "\" fill=\"#cccccc\"/>" << endl;
             Shape* output = stack.pop();
-            output->transform("SCA");
             output->show();
             cout << "<rect x=\"0\" y=\"0\" width=\"" + to_string(width) + "\" height=\"" + to_string(height) + "\" stroke=\"#999999\" fill=\"none\" stroke-width=\"1\"/>" << endl;
             cout << "</svg>" << endl;

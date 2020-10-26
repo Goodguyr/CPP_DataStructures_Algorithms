@@ -20,7 +20,9 @@ public:
     };
     void group(int n){
         Group* newGroup = new Group();
-        newGroup->shapes.push_back(pop());
+        for(int i = 0; i < n; i++){
+            newGroup->shapes.push_back(pop());
+        }
         data.push_back(newGroup);
     };
     Shape* pop(){
