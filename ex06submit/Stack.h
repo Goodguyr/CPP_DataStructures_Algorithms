@@ -6,16 +6,10 @@
 #include <iostream>
 
 class Stack{
-    int size;
-    int pointer;
     std::vector<Shape*> data;
 public:
-    Stack(){
-        size = 0;
-        pointer = 0;
-    };
+    Stack(){};
     void push(Shape* shape){
-        size++;
         data.push_back(shape);
     };
     void group(int n){
@@ -29,7 +23,6 @@ public:
         Shape* temp = data.back();
         //pop back might destroy
         data.pop_back();
-        size--;
         return temp;
     };
 };

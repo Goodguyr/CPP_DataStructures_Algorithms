@@ -39,6 +39,12 @@ int main(){
             temp->transform(mode, ss);
             stack.push(temp);
         }
+        else if(action == "COPY"){
+            Shape* temp = stack.pop();
+            Shape* deepCopy = temp->copy();
+            stack.push(temp);
+            stack.push(deepCopy);
+        }
         else if(action == "SHOW"){
             int width, height;
             ss >> width >> height;
