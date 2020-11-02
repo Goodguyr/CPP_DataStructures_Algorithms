@@ -13,9 +13,9 @@ public:
     };
     bool isEmpty(){
         if(size){
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
     void push(T item){
         mem_check();
@@ -23,9 +23,15 @@ public:
         size++;
     };
     T pop(){
+        if(!size){
+            return 0;
+        }
         size--;
         return data[size];
     };
+    T peek(){
+        return data[size - 1];
+    }
     void mem_check(){
         if(size == capacity){
             capacity *= 2;

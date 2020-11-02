@@ -2,11 +2,11 @@
 #include <iostream>
 #include "Alien.h"
 #include "Stack.h"
-#include "FavouriteRelatives.h"
 
 using namespace std;
 
-FavouriteRelatives inorderDFS(Alien* node, Alien* aliens[]);
+void get_fav_relatives(Alien* node, Alien** aliens);
+void DFS(Alien* node, Stack<int>* stack, int initial_val);
 
 int main(){
     Alien* aliens[10001];
@@ -15,7 +15,6 @@ int main(){
         istringstream ss(line);
         char mode;
         ss >> mode;
-        cout << mode << "- MODE"<< endl;
         int parent_value, child_value;
         if(mode == 'T'){
             ss >> parent_value;
@@ -57,9 +56,7 @@ int main(){
         else if(mode == '?'){
             ss >> parent_value;
             if(aliens[parent_value]){
-                FavouriteRelatives answer;
-                answer = inorderDFS(aliens[parent_value], aliens);
-                cout << answer.previous << " " << answer.next << endl;   
+                get_fav_relatives(aliens[parent_value], aliens);
             }
             else{
                 cout << "error0" << endl;
@@ -72,27 +69,27 @@ int main(){
     return 0;
 }
 
-FavouriteRelatives inorderDFS(Alien* node, Alien* aliens[]){
-    FavouriteRelatives answer;
-    Alien* temp = aliens[node->getRootValue()];
-    int previous_value;
+void get_fav_relatives(Alien* node, Alien** aliens){
+    Alien* root = node->getRootNode();
+    int prev, next;
     Stack<int> stack;
-    while(temp || !stack.isEmpty()){
-        while(temp){
-            stack.push(temp->value);
-            temp = temp->left;
-        }
-        cout << "BRUH" << endl;
-        temp = aliens[stack.pop()];
-        if(temp->value == node->value){
-            answer.previous = previous_value;
-        }
-        else if(previous_value == node->value){
-            answer.next = temp->value;
-            return answer;
-        }
-        previous_value = temp->value;
-        temp = temp->right;
+    DFS(root, &stack, node->value);
+    next = stack.pop();
+    if(next == node->value){
+        cout << stack.pop() << " " << 0 << endl;
+        return;
     }
-    return answer;
+    while(stack.peek() != node->value){
+        next = stack.pop();
+    }
+    stack.pop();
+    prev = stack.pop();
+    cout << prev << " " << next << endl;
+}
+
+void DFS(Alien* node, Stack<int>* stack, int initial_val){
+    if(!node){return;}
+    DFS(node->left, stack, initial_val);
+    stack->push(node->value);
+    DFS(node->right, stack, initial_val);
 }

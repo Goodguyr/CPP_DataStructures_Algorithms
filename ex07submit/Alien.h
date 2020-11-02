@@ -4,11 +4,10 @@ struct Alien{
     Alien* parent;
     Alien* left;
     Alien* right;
-    int getRootValue(){
-        Alien* temp = this;
-        while(temp->parent){
-            temp = parent;
+    Alien* getRootNode(){
+        if(this->parent){
+            return this->parent->getRootNode();
         }
-        return temp->value;
+        return this;
     }
 };
