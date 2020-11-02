@@ -35,7 +35,11 @@ public:
     void mem_check(){
         if(size == capacity){
             capacity *= 2;
-            data = new T[capacity];
+            T* temp = new T[capacity];
+            for(int i = 0; i < size; i++){
+                temp[i] = data[i];
+            }
+            data = temp;
         }
     }
 };
