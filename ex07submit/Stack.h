@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 template <class T>
 class Stack{
     int size, capacity;
@@ -6,10 +8,11 @@ public:
     Stack(){
         size = 0;
         capacity = 10;
+        data = (T*)malloc(capacity * sizeof(T));
         data = new T[capacity];
     };
     ~Stack(){
-        delete[] data;
+        free(data);
     };
     bool isEmpty(){
         if(size){
@@ -35,11 +38,7 @@ public:
     void mem_check(){
         if(size == capacity){
             capacity *= 2;
-            T* temp = new T[capacity];
-            for(int i = 0; i < size; i++){
-                temp[i] = data[i];
-            }
-            data = temp;
+            data = (T*)realloc(data, capacity * sizeof(T));
         }
     }
 };
