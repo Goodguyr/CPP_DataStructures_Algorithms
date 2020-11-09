@@ -9,7 +9,6 @@ void get_fav_relatives(Alien* node, Alien** aliens);
 void DFS(Alien* node, Stack<int>* stack, int initial_val);
 
 int main(){
-    //Stack<Stack<int>*> DFS_Stack;
     Alien* aliens[10001] = {};
     string line;
     while(getline(cin, line)){
@@ -73,20 +72,18 @@ int main(){
 void get_fav_relatives(Alien* node, Alien** aliens){
     Alien* root = node->getRootNode();
     int prev, next;
-    Stack<int>* stack = new Stack<int>;
-    //Stack<int> stack;
-    DFS(root, stack, node->value);
-    
-    next = stack->pop();
+    Stack<int> stack;
+    DFS(root, &stack, node->value);
+    next = stack.pop();
     if(next == node->value){
-        cout << stack->pop() << " " << 0 << endl;
+        cout << stack.pop() << " " << 0 << endl;
         return;
     }
-    while(stack->peek() != node->value){
-        next = stack->pop();
+    while(stack.peek() != node->value){
+        next = stack.pop();
     }
-    stack->pop();
-    prev = stack->pop();
+    stack.pop();
+    prev = stack.pop();
     cout << prev << " " << next << endl;
 }
 
