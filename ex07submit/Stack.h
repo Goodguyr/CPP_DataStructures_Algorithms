@@ -9,7 +9,6 @@ public:
         size = 0;
         capacity = 10;
         data = (T*)malloc(capacity * sizeof(T));
-        data = new T[capacity];
     };
     ~Stack(){
         free(data);
