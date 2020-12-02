@@ -95,7 +95,7 @@ Node* AVLTree::insert(Node* node, std::string word){
 }
 
 Node * minValueNode(Node* node){
-    return node->left != NULL ? minValueNode(node) : node;
+    return node->left != NULL ? minValueNode(node->left) : node;
 }
 
 Node* AVLTree::deleteNode(Node* node, std::string word){
@@ -108,7 +108,7 @@ Node* AVLTree::deleteNode(Node* node, std::string word){
 	else if(compareFunction(node->word, word) == -1){
         node->right = deleteNode(node->right, word);
     }
-	else{
+	else if(compareFunction(node->word, word) == 0){
 		if(node->left == NULL || node->right == NULL){
 			Node *temp = node->left ? node->left : node->right;
 			if(temp == NULL){
@@ -122,7 +122,8 @@ Node* AVLTree::deleteNode(Node* node, std::string word){
 		}
 		else{
 			Node* temp = minValueNode(node->right);
-			node->word = temp->word;
+            node->word = temp->word;
+            node->count = temp->count;
 			node->right = deleteNode(node->right, temp->word);
 		}
 	}
@@ -186,15 +187,27 @@ void AVLTree::locate(Node* node, std::string value){
 }
 
 void AVLTree::dump(Node* node, std::string start, std::string end){
-    startDeleting = (start == "_" || startDeleting == 1) ? 1 : 0;
-    // std::cout << "start status -" << startDeleting << std::endl;
-    endDeleting = (end != "_" || endDeleting == 1) ? 1 : 0;
     if(node == NULL){return;}
     dump(node->left, start, end);
-    if(start == node->word){startDeleting = 1;};
-    if(end == node->word){endDeleting = 1;}
-    if(!startDeleting && endDeleting && end != "_"){return;}
-    if(startDeleting && !endDeleting){
+    if(start == "_" || end == "_"){
+        if(start == end){
+            std::cout << "(" << node->word << "," << node->count << ")" << " ";
+        }
+        else if(start == "_"){
+            if(compareFunction(end, node->word) > -1){
+                std::cout << "(" << node->word << "," << node->count << ")" << " ";
+            }
+        }
+        else if(end == "_"){
+            if(compareFunction(start, node->word) < 1){
+                std::cout << "(" << node->word << "," << node->count << ")" << " ";
+            }
+        }
+    }
+    else if(compareFunction(start, end) == 1){
+        return;
+    }
+    else if(compareFunction(start, node->word) < 1 && compareFunction(end, node->word) > -1){
         std::cout << "(" << node->word << "," << node->count << ")" << " ";
     }
     dump(node->right, start, end);

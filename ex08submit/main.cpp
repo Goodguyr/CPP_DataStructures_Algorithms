@@ -8,7 +8,7 @@ int main(){
     string line, mode;
     AVLTree myTree;
     myTree.root = NULL;
-    int lineCounter = 1;
+    int lineCounter = 0;
     cin >> mode;
     if(mode == "COLEX"){
         myTree.compareFunction = colexCompare;
